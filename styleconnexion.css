@@ -1,0 +1,170 @@
+/* Réinitialisation des styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Canvas plein écran */
+  #matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* En arrière-plan */
+    background-color: black; /* Pour un fond noir de base */
+  }
+  
+  /* Contenu centré */
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Styles pour le titre */
+  .title {
+    font-family: 'Clicker Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 8rem;
+    text-shadow: 0px 0px 15px rgb(255, 2, 2); /* Effet lumineux */
+  }
+  
+  /* Styles pour le paragraphe */
+  p {
+    font-size: 1.5rem;
+    line-height: 1.8;
+  }
+  
+  /* Formulaire de connexion */
+.login-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .login-form .form-item {
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .login-form .form-control {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    border: 1px solid rgba(255, 0, 0, 0.5); /* Bordure rouge translucide */
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white; /* Texte blanc */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Effet de texte lumineux */
+    box-shadow: inset 0 0 5px rgba(255, 0, 0, 0.5); /* Effet lumineux intérieur */
+}
+
+.login-form .form-control:focus {
+    outline: none;
+    border-color: red; /* Bordure rouge vif */
+    background: rgba(3, 3, 74, 0); /* Légère surbrillance rouge */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.167), 0 0 20px rgba(255, 0, 0, 0.5); /* Effet lumineux extérieur */
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.login-form .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Placeholder blanc avec transparence */
+    font-style: italic;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.login-form .form-control:focus::placeholder {
+    color: rgba(255, 255, 255, 0.4); /* Placeholder plus discret lors du focus */
+}
+  
+  .login-form .btn {
+    height: 50px;
+    padding: 0 60px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, rgba(255, 0, 0, 1), rgba(255, 0, 0, 0.5));
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7), 0 0 20px rgba(255, 0, 0, 0.5);
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-form .btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(90deg, rgba(255, 0, 0, 1), rgba(255, 100, 100, 1));
+    box-shadow: 0 0 10px rgba(255, 50, 50, 1), 0 0 30px rgba(255, 50, 50, 0.8);
+}
+
+/* Effet lumineux */
+.login-form .btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+    transition: left 0.4s ease;
+    transform: skewX(-45deg);
+}
+
+.login-form .btn:hover::after {
+    left: 100%;
+}
+
+/* Conteneur principal des notifications */
+#notification-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Notification individuelle */
+.notification {
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: white;
+  opacity: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* Couleurs des notifications */
+.notification.success {
+  background-color: rgba(0, 128, 0, 0.9); /* Vert */
+}
+
+.notification.error {
+  background-color: rgba(255, 0, 0, 0.9); /* Rouge */
+}
+
+/* Animation de disparition */
+.notification.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
