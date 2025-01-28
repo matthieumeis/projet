@@ -5,7 +5,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const API_URL = 'https://api.jsonbin.io/v3/b/6798ed28ad19ca34f8f5d8ac'; // Remplacez YOUR_BIN_ID par votre ID de Bin
+    const API_URL = 'https://api.jsonbin.io/v3/b/6798ed28ad19ca34f8f5d8ac'; // Remplacez par votre ID de Bin
     const API_KEY = '$2a$10$AXpJEL1LMo3VGk/MlNZ0/ut2wQKWVMywMLK7NmoQQTpQWh3bXSYHS'; // Remplacez par votre clé API JSONBin
 
     try {
@@ -28,6 +28,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const user = data.users.find(user => user.username === username && user.password === password);
 
         if (user) {
+            // Générer un token et le stocker dans le sessionStorage
+            const token = generateToken(user.username);
+            sessionStorage.setItem('authToken', token);
+
             // Afficher une notification et attendre 3 secondes avant la redirection
             showNotification('Connexion réussie ! Redirection dans 3 secondes...', 'success', 5000);
 
@@ -43,6 +47,16 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         showNotification('Une erreur est survenue. Veuillez réessayer.', 'error', 5000);
     }
 });
+
+/**
+ * Fonction pour générer un token simple
+ * @param {string} username - Nom d'utilisateur
+ * @returns {string} - Token généré
+ */
+function generateToken(username) {
+    // Un token simple encodé en base64 (peut être amélioré avec une librairie comme JWT)
+    return btoa(`${username}:${new Date().getTime()}`);
+}
 
 /**
  * Fonction pour afficher une notification
@@ -86,4 +100,16 @@ function createNotificationContainer() {
     container.style.gap = '10px';
     document.body.appendChild(container);
     return container;
+}
+
+// Vérification automatique de l'authentification sur une page protégée
+if (window.location.pathname === '/site.html') {
+    const token = sessionStorage.getItem('authToken');
+
+    if (!token) {
+        // Si pas de token, redirection vers la page de connexion
+        window.location.href = 'login.html';
+    } else {
+        console.log('Utilisateur authentifié avec succès.');
+    }
 }
